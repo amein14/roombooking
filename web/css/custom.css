@@ -1,0 +1,49 @@
+.dwm_main td, th{
+  text-align: middle;
+  border-bottom: 0.5px solid #ddd;
+}
+
+.row_labels a {
+  line-height: 25px;
+}
+
+.calendar {
+  display: none;
+}
+
+/*.dwm_rooms {
+  display:inline-block;
+  font-size: 10px;
+  padding: 10px;
+}
+.screenonly {
+  display: none;
+}
+.calendar {
+  display: none;
+}
+.banner {
+  display: none;
+}
+.date_nav {
+  display: none;
+}
+
+a:hover {
+	color: red;
+	pointer-events: none;
+}
+a:active {
+	pointer-events: none;
+}
+
+.dwm_main td, tr {
+  border-bottom: 0.5px solid #ddd;
+}
+*/
+.dwm_main th {
+  padding: 5px;
+}
+.dwm_main .first_last {
+  vertical-align: middle;
+}
