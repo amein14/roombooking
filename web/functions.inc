@@ -1493,27 +1493,50 @@ function make_area_select_html($link, $current, $year, $month, $day)
 function make_room_select_html ($link, $area, $current, $year, $month, $day)
 {
   global $area_list_format;
-  
+
   $out_html = '';
   $rooms = get_room_names($area);
-  
+
   // Only show the rooms if there's more than one of them, otherwise
   // there's no point
   if (count($rooms) > 1)
   {
+    $custom_styles = "<style>
+    #dwm_rooms ul {
+      list-style-type: none !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      overflow: hidden !important;
+    }
+
+    #dwm_rooms li {
+      float: left !important;
+      background-color: #333333 !important;
+      margin-left: 4px !important;
+    }
+
+    #dwm_rooms li a {
+      display: block !important;
+      color: white !important;
+      text-align: center !important;
+      padding: 4px !important;
+      text-decoration: none !important;
+    }
+    </style>";
+
     $out_html .= "<div id=\"dwm_rooms\">\n";
     $out_html .= "<h3>" . get_vocab("rooms") . "</h3>";
     if ($area_list_format == "select")
     {
       $form = new Form();
-      
+
       $form->setAttributes(array('id'     => 'roomChangeForm',
                                  'method' => 'get',
                                  'action' => $link));
-                                 
+
       $form->addHiddenInputs(array('page_date' => format_iso_date($year, $month, $day),
                                    'area'      => $area));
-      
+
       $select = new ElementSelect();
       $select->setAttributes(array('class'    => 'room_area_select',
                                    'id'       => 'room_select',
@@ -1521,13 +1544,13 @@ function make_room_select_html ($link, $area, $current, $year, $month, $day)
                                    'onchange' => 'this.form.submit()'))
              ->addSelectOptions($rooms, $current, true);
       $form->addElement($select);
-      
+
       // Note:  the submit button will not be displayed if JavaScript is enabled
       $submit = new ElementInputSubmit();
       $submit->setAttributes(array('class' => 'js_none',
                                    'value' => get_vocab('change')));
       $form->addElement($submit);
-      
+
       $out_html .= $form->toHTML();
     }
     else  // list format
